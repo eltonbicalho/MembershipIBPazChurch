@@ -36,7 +36,7 @@ jobs:
             pushd ${{ env.APPLICATIONPATH }}
             dotnet restore
             dotnet build --configuration Release
-            dotnet test Membership.UnitTests/Membership.UnitTests.csproj  --verbosity normal
+            dotnet test Membership.UnitTest/Membership.UnitTest.csproj  --verbosity normal
             popd
 
     # Create Azure container registry
