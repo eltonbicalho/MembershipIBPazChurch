@@ -3,9 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-Membership-9200D3A5-B57D-4F7D-A58B-CF98694FD8CD</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/cf40ae08-9b9f-4b9f-898b-f9b2a62a1810/resourceGroups/MembershipIBPazChurch-rg/providers/microsoft.insights/components/MembershipIBPazChurch</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="3.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.11" />
