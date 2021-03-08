@@ -1,0 +1,19 @@
+﻿@model Membership.Models.Subscribers
+@{
+    ViewData["Title"] = "Obrigado!";
+}
+<div>
+    <h4>Sucesso!</h4>
+    <hr />
+    <div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <div class="text-center">
+            <img src="/images/logo-topo.png" alt="Igreja Batista da Paz">
+        </div>
+        <br />
+        <h3 class="display-4">Obrigado @Html.DisplayFor(model => model.Nome)!</h3>
+        <p class="lead">Em breve você receberá um e-mail de confirmação no endereço <strong>@Html.DisplayFor(model => model.Email)</strong>!</p>
+    </div>
+</div>
+<div>
+    <a class="w-100 btn btn-lg btn-outline-primary" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+</div>

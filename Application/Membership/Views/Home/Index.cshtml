@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <div class="text-center">
+        <img src="/images/logo-topo.png" alt="Igreja Batista da Paz">
+    </div>
+    <h1 class="display-4">Cadastros de Membros da IBPaz</h1>
+    <p class="lead">Saiba mais sobre a IBPaz <a href="http://www.ibpaz.org.br/">http://www.ibpaz.org.br</a>.</p>
+</div>
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 fw-normal">Eu gosto da IBPaz</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Quero saber das novidades</li>
+                    <li>Notícias</li>
+                    <li>Discipulado</li>
+                    <li>Eventos</li>
+                </ul>
+                <a class="w-100 btn btn-lg btn-outline-primary" asp-area="" asp-controller="Subscribers" asp-action="Index">Cadastrar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 fw-normal">Quero ser membro</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Ser batizado</li>
+                    <li>Reconhecer a autoridade espiritual de um pastor</li>
+                    <li>Participar do Corpo de Cristo</li>
+                    <li>Reconciliar com Cristo</li>
+                </ul>
+                <a class="w-100 btn btn-lg btn-primary" asp-area="" asp-controller="PreMembros" asp-action="Index">Pré-Inscrição</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header">
+                <h4 class="my-0 fw-normal">Sou Membro</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Ainda não tenho cadastrado</li>
+                    <li>Alterar meus dados</li>
+                    <li>Requisições</li>
+                    <li>Ajuda</li>
+                </ul>
+                <a class="w-100 btn btn-lg btn-primary" asp-area="Identity" asp-page="/Account/Login">Acessar meu Cadastro</a>
+            </div>
+        </div>
+    </div>
+</div>
