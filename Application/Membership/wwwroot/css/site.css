@@ -71,7 +71,9 @@ body {
 }
 
 
-
+#header_img {
+    background-image: url(../images/bg-topo.png)
+}
 
 .footer {
   position: absolute;
