@@ -24,7 +24,6 @@ namespace Membership.Data
         public virtual DbSet<PreMembros> PreMembros { get; set; }
         public virtual DbSet<Subscribers> Subscribers { get; set; }
 
-        /*
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -32,7 +31,7 @@ namespace Membership.Data
                 optionsBuilder.UseSqlServer("Server=tcp:eltonbicalho.database.windows.net,1433;Initial Catalog=Membresia;Persist Security Info=False;User ID=elton;Password=!QAZ2wsx;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
-        */
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Igrejas>(entity =>
