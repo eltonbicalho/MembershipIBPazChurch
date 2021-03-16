@@ -1,0 +1,14 @@
+﻿@page
+@model LockoutModel
+@{
+    ViewData["Title"] = "Bloqueado";
+}
+
+<header>
+    <h1 class="text-danger">@ViewData["Title"]</h1>
+    <p class="text-danger">Esta conta foi bloqueada, tente novamente mais tarde.</p>
+</header>
+<div>
+    <br />
+    <a class="w-100 btn btn-lg btn-outline-primary" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+</div>

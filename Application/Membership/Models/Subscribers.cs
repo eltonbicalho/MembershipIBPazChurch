@@ -16,6 +16,7 @@ namespace Membership.Models
         [Required(ErrorMessage = "O seu e-mail deve ser informado!")]
         [StringLength(100)]
         [Display(Name = "e-mail")]
+        [EmailAddress(ErrorMessage = "e-mail inválido!")]
         public string Email { get; set; }
         [Required(ErrorMessage = "O seu telefone celular deve ser informado!")]
         [StringLength(100)]
