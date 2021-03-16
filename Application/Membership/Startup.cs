@@ -27,16 +27,20 @@ namespace Membership
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>();
-            services.AddDbContext<MembresiaContext>();
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("SecurityConnection")));
+            services.AddDbContext<MembresiaContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddAuthentication().AddFacebook(facebookOptions =>
+            /*services.AddAuthentication().AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = "429975198062133";
                 facebookOptions.AppSecret = "0dc28068a4fc1278310dfee92063f2e9";
                 facebookOptions.AccessDeniedPath = "/AccessDeniedPathInfo";
-            });
+            });*/
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
