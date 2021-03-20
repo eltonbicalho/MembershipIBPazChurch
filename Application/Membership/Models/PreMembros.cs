@@ -9,7 +9,7 @@ namespace Membership.Models
     {
         [Key]
         public int IdPreMembro { get; set; }
-        [Display(Name = "Qual filial você congreja/deseja congregar?")]
+        [Display(Name = "De qual congregação você deseja ser membro?")]
         public int IdIgreja { get; set; }
         [Required(ErrorMessage = "O seu nome deve ser informado!")]
         [StringLength(80)]
