@@ -3,10 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Membership.Models;
 
-// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
-// If you have enabled NRTs for your project, then un-comment the following line:
-// #nullable disable
-
 namespace Membership.Data
 {
     public partial class MembresiaContext : DbContext
@@ -23,6 +19,7 @@ namespace Membership.Data
         public virtual DbSet<Igrejas> Igrejas { get; set; }
         public virtual DbSet<PreMembros> PreMembros { get; set; }
         public virtual DbSet<Subscribers> Subscribers { get; set; }
+        public virtual DbSet<Persons> Persons { get; set; }
 
         /*
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -77,6 +74,18 @@ namespace Membership.Data
                 entity.Property(e => e.Nome).IsUnicode(false);
 
                 entity.Property(e => e.Telefone).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Persons>(entity =>
+            {
+                entity.HasKey(e => e.IdPerson)
+                    .HasName("PK__Persons__A5D4E15B62C4BA3F");
+                entity.Property(e => e.FirstName).IsUnicode(false);
+                entity.Property(e => e.LastName).IsUnicode(false);
+                entity.Property(e => e.Email).IsUnicode(false);
+                entity.Property(e => e.CellPhone).IsUnicode(false);
+                entity.Property(e => e.Gender).IsUnicode(false);
+                entity.Property(e => e.AspNetUserID).IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

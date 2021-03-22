@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using Membership.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
 
 namespace Membership.Areas.Identity.Pages.Account.Manage
 {
@@ -13,15 +17,18 @@ namespace Membership.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
+        private readonly MembresiaContext _context;
 
         public DeletePersonalDataModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeletePersonalDataModel> logger,
+            MembresiaContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -66,7 +73,14 @@ namespace Membership.Areas.Identity.Pages.Account.Manage
                     return Page();
                 }
             }
-
+            var persons = await _context.Persons
+                .FirstOrDefaultAsync(m => m.AspNetUserID == user.Id);
+            if (persons != null)
+            {
+                persons.AspNetUserID = null;
+                _context.Update(persons);
+                await _context.SaveChangesAsync();
+            }
             var result = await _userManager.DeleteAsync(user);
             var userId = await _userManager.GetUserIdAsync(user);
             if (!result.Succeeded)
