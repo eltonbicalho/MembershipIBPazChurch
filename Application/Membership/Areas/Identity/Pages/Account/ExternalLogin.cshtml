@@ -10,7 +10,7 @@
 
 <p id="external-login-description" class="text-info">
     Você se autenticou com sucesso com <strong>@Model.ProviderDisplayName</strong>.
-    Por favor, insira um endereço de e-mail abaixo para este site e clique no botão Registrar para concluir o login.
+    Por favor, informe os seus dados abaixo para este site e clique no botão Registrar para concluir o login.
 </p>
 
 <div class="row">
@@ -18,9 +18,29 @@
         <form asp-page-handler="Confirmation" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="Input.FirstName"></label>
+                <input asp-for="Input.FirstName" class="form-control" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.LastName"></label>
+                <input asp-for="Input.LastName" class="form-control" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Gender"></label><br />
+                @Html.RadioButtonFor(m => m.Input.Gender, "Masculino")<span> Masculino </span><br />
+                @Html.RadioButtonFor(m => m.Input.Gender, "Feminino")<span> Feminino </span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber"></label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Registrar</button>
         </form>

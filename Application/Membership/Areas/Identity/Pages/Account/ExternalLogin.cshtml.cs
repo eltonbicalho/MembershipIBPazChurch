@@ -6,6 +6,8 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using Membership.Data;
+using Membership.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -23,17 +25,20 @@ namespace Membership.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
+        private readonly MembresiaContext _context;
 
         public ExternalLoginModel(
             SignInManager<IdentityUser> signInManager,
             UserManager<IdentityUser> userManager,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            MembresiaContext context)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -48,9 +53,26 @@ namespace Membership.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required(ErrorMessage = "O seu primeiro nome deve ser informado!")]
+            [StringLength(60)]
+            [Display(Name = "Nome")]
+            public string FirstName { get; set; }
+
+            [Required(ErrorMessage = "O seu sobrenome nome deve ser informado!")]
+            [StringLength(60)]
+            [Display(Name = "Sobrenome")]
+            public string LastName { get; set; }
+
+            [Display(Name = "Sexo")]
+            public string Gender { get; set; }
+
             [Required(ErrorMessage = "O e-mail deve ser informado!")]
             [EmailAddress(ErrorMessage = "e-mail inválido!")]
+            [Display(Name = "e-mail")]
             public string Email { get; set; }
+
+            [Display(Name = "Telefone Celular")]
+            public string PhoneNumber { get; set; }
         }
 
         public IActionResult OnGetAsync()
@@ -121,7 +143,7 @@ namespace Membership.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email, PhoneNumber = Input.PhoneNumber };
 
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
@@ -130,6 +152,19 @@ namespace Membership.Areas.Identity.Pages.Account
                     if (result.Succeeded)
                     {
                         _logger.LogInformation("O usuário criou uma conta usando o provedor {Name}.", info.LoginProvider);
+
+                        Persons person = new Persons
+                        {
+                            FirstName = Input.FirstName,
+                            LastName = Input.LastName,
+                            Gender = Input.Gender,
+                            Email = Input.Email,
+                            CellPhone = Input.PhoneNumber,
+                            AspNetUserID = user.Id
+                        };
+                        _context.Persons.Add(person);
+                        await _context.SaveChangesAsync();
+                        _logger.LogInformation("Person created");
 
                         var userId = await _userManager.GetUserIdAsync(user);
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
