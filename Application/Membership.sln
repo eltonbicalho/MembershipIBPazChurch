@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Membership.UnitTest", "Membership.UnitTest\Membership.UnitTest.csproj", "{7FC1757E-F7E4-478F-B6AA-ECBD7FAE4A35}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Membership.FunctionalTests", "Membership.FunctionalTests\Membership.FunctionalTests.csproj", "{32B00813-1074-4594-9D1A-7E39C9332259}"
+	ProjectSection(ProjectDependencies) = postProject
+		{51BA8CC7-960C-4CB3-8AC0-17B49DD08155} = {51BA8CC7-960C-4CB3-8AC0-17B49DD08155}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{986246E1-E02C-445C-B69A-DB96BC1A8F93}"
 EndProject
