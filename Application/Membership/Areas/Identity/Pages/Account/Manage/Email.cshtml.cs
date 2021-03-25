@@ -99,9 +99,9 @@ namespace Membership.Areas.Identity.Pages.Account.Manage
                     values: new { userId = userId, email = Input.NewEmail, code = code },
                     protocol: Request.Scheme);
                 await _emailSender.SendEmailAsync(
-                    Input.NewEmail,
-                    "Confirme seu email",
-                    $"Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
+                    email,
+                    "IBPaz Membro - email de confirmação",
+                    $"<h2>Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.</h2>");
 
                 StatusMessage = "Link de confirmação para alterar o e-mail enviado. Por favor verifique seu email.";
                 return RedirectToPage();
@@ -134,11 +134,11 @@ namespace Membership.Areas.Identity.Pages.Account.Manage
                 pageHandler: null,
                 values: new { area = "Identity", userId = userId, code = code },
                 protocol: Request.Scheme);
+
             await _emailSender.SendEmailAsync(
                 email,
-                "Confirme seu email",
-                $"Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
-
+                "IBPaz Membro - email de confirmação",
+                $"<h2>Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.</h2>");
             StatusMessage = "E-mail de verificação enviado. Por favor verifique sua caixa de e-mail.";
             return RedirectToPage();
         }

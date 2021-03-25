@@ -3,20 +3,24 @@
 @{
     ViewData["Title"] = "Confirmação de cadastro";
 }
-
+<partial name="_LogoHeader" />
 <h1>@ViewData["Title"]</h1>
 @{
     if (@Model.DisplayConfirmAccountLink)
     {
-    <p>
-        Este aplicativo não tem atualmente um remetente de e-mail real registrado.
-        Normalmente, isso seria enviado por e-mail: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Clique aqui para confirmar sua conta</a>
-    </p>
+        <p>
+            Este aplicativo não tem atualmente um remetente de e-mail real registrado.
+            Normalmente, isso seria enviado por e-mail: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Clique aqui para confirmar sua conta</a>
+        </p>
     }
     else
     {
-<p>
-    Por favor, verifique seu e-mail para confirmar sua conta.
-</p>
+        <p>
+            Por favor, verifique seu e-mail para confirmar sua conta.
+        </p>
     }
 }
+<div>
+    <br />
+    <a class="w-100 btn btn-lg btn-outline-primary" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+</div>

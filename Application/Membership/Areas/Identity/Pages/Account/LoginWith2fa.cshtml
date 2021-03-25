@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Autenticação de dois fatores";
 }
-
+<partial name="_LogoHeader" />
 <h1>@ViewData["Title"]</h1>
 <hr />
 <p>Seu login é protegido por um aplicativo autenticador. Digite seu código de autenticador abaixo.</p>
@@ -32,7 +32,7 @@
     </div>
 </div>
 <p>
-    Não tem acesso ao seu dispositivo autenticador? Você pode 
+    Não tem acesso ao seu dispositivo autenticador? Você pode
     <a id="recovery-code-login" asp-page="./LoginWithRecoveryCode" asp-route-returnUrl="@Model.ReturnUrl">fazer login com um código de recuperação</a>.
 </p>
 <div>

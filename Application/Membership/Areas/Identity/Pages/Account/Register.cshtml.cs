@@ -121,8 +121,19 @@ namespace Membership.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirme seu email",
-                        $"Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.");
+
+
+                    await _emailSender.SendEmailAsync(
+                        Input.Email,
+                        "IBPaz - email de confirmação",
+                        "<div style='text-align: center!important;box-sizing: border-box;display: block;'>" +
+                        "<img style='vertical-align: middle;' src='http://www.ibpaz.org.br/images/logo-responsive.png' alt='Igreja Batista da Paz'>" +
+                        "<br/>" +
+                        "<h1>Cadastros de Membros da IBPaz</h1>" +
+                        "<br/>" +
+                        "<br/><h2>Olá " + Input.FirstName + ",<h2><br/>" +
+                        $"<h2>Por favor, confirme sua conta <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicando aqui</a>.</h2>"+
+                        "</div>");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

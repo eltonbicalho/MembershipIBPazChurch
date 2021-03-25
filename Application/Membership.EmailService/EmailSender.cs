@@ -24,8 +24,10 @@ namespace Membership.EmailService
             Send(emailMessage);
         }
 
-        public async Task SendEmailAsync(Message message)
+        public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
+            var message = new Message(new string[] { email }, subject, htmlMessage, null);
+
             var mailMessage = CreateEmailMessage(message);
 
             await SendAsync(mailMessage);

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Membership.EmailService;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
@@ -34,8 +35,24 @@ namespace Membership
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IdentityErrorDescriber, CustomIdentityErrorDescriber>();
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options =>
+                    {
+                        options.SignIn.RequireConfirmedAccount = true;
+                        options.SignIn.RequireConfirmedEmail = true;
+                        options.Password.RequiredLength = 3;
+                        options.Password.RequireDigit = false;
+                        options.Password.RequireUppercase = false;
+                        options.User.RequireUniqueEmail = true;
+                    }
+                )
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            var emailConfig = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<Microsoft.AspNetCore.Identity.UI.Services.IEmailSender, EmailSender>();
+
             services.AddAuthentication().AddFacebook(facebookOptions =>
             {
                 facebookOptions.AppId = "429975198062133";
