@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using MimeKit;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace Membership.EmailService
 {
